@@ -26,13 +26,14 @@ export default function Dashboard({ totalProducts, totalStock, totalValue }) {
           (sum, product) => sum + (product.quantity || 0),
           0,
         );
-        const totalValue = productsData
+        const totalValueRaw = productsData
           .reduce(
             (sum, product) =>
               sum + (product.quantity || 0) * (product.productPrice || 0),
             0,
           )
           .toFixed(2);
+        const totalValue = `₹${Math.round(totalValueRaw / 1000)}K`;
         const lowStockCount = productsData.filter(
           (product) => (product.quantity || 0) < LOW_STOCK_THRESHOLD,
         ).length;

@@ -5,9 +5,9 @@ import "./Login.css";
 export default function Login({ onLoginSuccess }) {
   const navigate = useNavigate();
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (role) => {
     if (onLoginSuccess) {
-      onLoginSuccess();
+      onLoginSuccess(role);
     }
     navigate("/");
   };

@@ -6,6 +6,7 @@ import {
   deleteProduct,
   uploadExcel,
   downloadExcel,
+  downloadBarcode,
 } from "../../services/ApiService";
 import Modal from "../../components/Modal/Modal";
 import ProductModalForm from "../../components/Form/Product/ProductModalForm";
@@ -15,7 +16,7 @@ import Swal from "sweetalert2";
 import CommentBox from "../../components/CommentBox/CommentBox";
 import Button from "../../components/Button/Button";
 
-export default function ProductsPage() {
+export default function ProductsPage({ role }) {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
@@ -25,17 +26,17 @@ export default function ProductsPage() {
   const [downloading, setDownloading] = useState(false);
   const fileInputRef = useRef(null);
 
+  const isAdmin = role && (role.toUpperCase() === "ROLE_ADMIN" || role.toUpperCase() === "ADMIN");
+  console.log("ProductsPage: role is", role, "isAdmin:", isAdmin);
+
   const fetchProducts = async () => {
     try {
       const res = await getProduct();
       setProducts(res.data.data || []);
-      console.log("Fetched products:", res.data.data);
     } catch (err) {
       console.error(err);
       toast.error(
-        err?.response?.data?.message ||
-          err?.message ||
-          "Error fetching products",
+        err?.response?.data?.message || err?.message || "Error fetching products"
       );
     }
   };
@@ -79,17 +80,13 @@ export default function ProductsPage() {
       fetchProducts();
     } catch (err) {
       toast.error(
-        err?.response?.data?.message ||
-          err?.message ||
-          "Error deleting product",
+        err?.response?.data?.message || err?.message || "Error deleting product"
       );
     }
   };
 
   const handleUploadClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
+    if (fileInputRef.current) fileInputRef.current.click();
   };
 
   const handleFileChange = async (e) => {
@@ -103,9 +100,7 @@ export default function ProductsPage() {
       await fetchProducts();
     } catch (err) {
       toast.error(
-        err?.response?.data?.message ||
-          err?.message ||
-          "Failed to upload file",
+        err?.response?.data?.message || err?.message || "Failed to upload file"
       );
     } finally {
       setUploading(false);
@@ -117,33 +112,27 @@ export default function ProductsPage() {
     setDownloading(true);
     try {
       const res = await downloadExcel();
-
       const blob = new Blob([res.data], {
         type:
           res.headers["content-type"] ||
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });
-
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-
       const disposition = res.headers["content-disposition"];
       let filename = "products.xlsx";
       if (disposition && disposition.includes("filename=")) {
         filename = disposition.split("filename=")[1].replace(/"/g, "").trim();
       }
       link.download = filename;
-
       document.body.appendChild(link);
       link.click();
       link.remove();
       window.URL.revokeObjectURL(url);
     } catch (err) {
       toast.error(
-        err?.response?.data?.message ||
-          err?.message ||
-          "Failed to download file",
+        err?.response?.data?.message || err?.message || "Failed to download file"
       );
     } finally {
       setDownloading(false);
@@ -160,15 +149,6 @@ export default function ProductsPage() {
       header: "Actions",
       accessor: (row) => (
         <>
-          <Button variant="edit" onClick={() => handleEditClick(row)}>
-            Edit
-          </Button>
-          <Button
-            variant="delete"
-            onClick={() => handleDelete(row.productId)}
-          >
-            Delete
-          </Button>
           <Button
             variant="comment"
             onClick={() => {
@@ -176,8 +156,28 @@ export default function ProductsPage() {
               setShowCommentModal(true);
             }}
           >
-            Comment
+            💬
           </Button>
+
+          {/* Barcode — available to all authenticated users */}
+          <Button
+            variant="barcode"
+            onClick={() => downloadBarcode(row.productId)}
+          >
+            Barcode
+          </Button>
+
+          {/* Admin-only action buttons */}
+          {isAdmin && (
+            <>
+              <Button variant="edit" onClick={() => handleEditClick(row)}>
+                ✏️
+              </Button>
+              <Button variant="delete" onClick={() => handleDelete(row.productId)}>
+                🗑️
+              </Button>
+            </>
+          )}
         </>
       ),
     },
@@ -186,31 +186,35 @@ export default function ProductsPage() {
   return (
     <>
       <h1>Products List</h1>
-      <Button variant="add" onClick={() => setShowModal(true)}>
-        Add Product
-      </Button>
-      <Button
-        variant="upload"
-        onClick={handleUploadClick}
-        disabled={uploading}
-      >
-        {uploading ? "Uploading..." : "Upload Excel"}
-      </Button>
-      <Button
-        variant="download"
-        onClick={handleDownloadClick}
-        disabled={downloading}
-      >
-        {downloading ? "Downloading..." : "Download Excel"}
-      </Button>
-      <input
-        type="file"
-        accept=".xls,.xlsx"
-        ref={fileInputRef}
-        style={{ display: "none" }}
-        onChange={handleFileChange}
-      />
+
+      {/* Admin-only top action buttons */}
+      {isAdmin && (
+        <>
+          <Button variant="add" onClick={() => setShowModal(true)}>
+            Add Product
+          </Button>
+          <Button variant="upload" onClick={handleUploadClick} disabled={uploading}>
+            {uploading ? "Uploading..." : "Upload Excel"}
+          </Button>
+          <Button
+            variant="download"
+            onClick={handleDownloadClick}
+            disabled={downloading}
+          >
+            {downloading ? "Downloading..." : "Download Excel"}
+          </Button>
+          <input
+            type="file"
+            accept=".xls,.xlsx"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleFileChange}
+          />
+        </>
+      )}
+
       <DataTable columns={columns} data={products} />
+
       {createPortal(
         <Modal
           isOpen={showModal}
@@ -222,8 +226,9 @@ export default function ProductsPage() {
             editProduct={editProduct}
           />
         </Modal>,
-        document.body,
+        document.body
       )}
+
       {createPortal(
         <Modal
           isOpen={showCommentModal}
@@ -240,7 +245,7 @@ export default function ProductsPage() {
             />
           )}
         </Modal>,
-        document.body,
+        document.body
       )}
     </>
   );

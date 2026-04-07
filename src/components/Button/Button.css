@@ -31,7 +31,7 @@
 
 /* Edit Button */
 .custom-btn-edit {
-  background-color: #007aff;
+  background-color: rgb(185, 236, 253);
   color: white;
 }
 .custom-btn-edit:hover:not(:disabled) {
@@ -41,7 +41,7 @@
 
 /* Delete Button */
 .custom-btn-delete {
-  background-color: #ff3b30;
+  background-color: #fa766f;
   color: white;
 }
 .custom-btn-delete:hover:not(:disabled) {
@@ -51,7 +51,7 @@
 
 /* Comment Button */
 .custom-btn-comment {
-  background-color: #ff9500;
+  background-color: #fcbe66;
   color: white;
 }
 .custom-btn-comment:hover:not(:disabled) {
@@ -76,7 +76,7 @@
 }
 
 .custom-btn-upload:hover:not(:disabled) {
-  background-color: #5a4a9e;
+  background-color: #5a4a9e;  
   box-shadow: 0 4px 8px rgba(72, 69, 233, 0.3);
 }
 
@@ -88,4 +88,14 @@
 .custom-btn-download:hover:not(:disabled) {
   background-color: darkorchid;
   box-shadow: 0 4px 8px rgba(233, 69, 214, 0.3);
+}
+
+.custom-btn-barcode {
+  background-color: rgb(177, 215, 109);
+  color: white;
+}
+
+.custom-btn-barcode:hover:not(:disabled) {
+  background-color: rgb(123, 147, 83);
+  box-shadow: 0 4px 8px rgb(103, 143, 39);
 }

@@ -1,17 +1,59 @@
-.form-group {
+/* --- Simplified Input styles --- */
+.input-wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  overflow: hidden;
 }
 
-.form-group label {
-  font-size: 13px;
-  color: #333;
+.input-wrapper:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
-.form-group input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* --- Static (Read-only) State - High Contrast --- */
+.input-static {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  cursor: not-allowed;
+}
+
+.input-static .form-input,
+.input-static .form-textarea {
+  cursor: not-allowed;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* --- Fields --- */
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
   font-size: 14px;
+  color: #1e293b;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-textarea {
+  resize: none;
+  min-height: 48px;
+}
+
+/* --- Error State --- */
+.input-error {
+  border-color: #ef4444 !important;
+  background-color: #fffefb;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
 }

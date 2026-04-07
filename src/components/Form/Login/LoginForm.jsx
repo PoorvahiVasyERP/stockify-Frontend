@@ -46,7 +46,7 @@ export default function LoginForm({ onSuccess }) {
         console.warn("No token found in login response");
       }
 
-      onSuccess();
+      onSuccess(response.data.role || localStorage.getItem("role"));
     } catch (err) {
       if (err.inner) {
         const newErrors = {};
@@ -91,7 +91,7 @@ export default function LoginForm({ onSuccess }) {
         {errors.password && <p className="error-message">{errors.password}</p>}
 
       </div>
-      <Link to="/register" className="register-link">Not a member? Register here</Link>
+
       <Link to="/forgot-password" className="forgot-link">Forgot password?</Link>
       <button
         type="submit"

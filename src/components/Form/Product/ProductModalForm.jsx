@@ -63,22 +63,23 @@ export default function ProductModalForm({ onSuccess, editProduct }) {
         });
         setErrors(newErrors);
       }
-      else{
+      else {
         const errorMessage = err?.response?.data?.message || err?.message || "Something went wrong.";
         toast.error(errorMessage);
       }
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="product-form">
+    <form onSubmit={handleSubmit} className="form-container">
       <Input
         label="Product Name"
         name="productName"
         value={form.productName}
         onChange={handleChange}
         placeholder="Enter product name"
+        leftIcon="fa-tag"
+        error={error.productName}
       />
-      {error.productName && <p className="error">{error.productName}</p>}
 
       <Input
         label="Description"
@@ -86,28 +87,40 @@ export default function ProductModalForm({ onSuccess, editProduct }) {
         value={form.productDescription}
         onChange={handleChange}
         placeholder="Enter description"
+        leftIcon="fa-align-left"
+        error={error.productDescription}
+        multiline
       />
-      {error.productDescription && <p className="error">{error.productDescription}</p>}
 
-      <Input
-        label="Price"
-        name="productPrice"
-        type="number"
-        value={form.productPrice}
-        onChange={handleChange}
-        placeholder="Enter price"
-      />
-      {error.productPrice && <p className="error">{error.productPrice}</p>}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "16px",
+        }}
+      >
+        <Input
+          label="Price"
+          name="productPrice"
+          type="number"
+          value={form.productPrice}
+          onChange={handleChange}
+          placeholder="Enter price"
+          leftIcon="fa-indian-rupee-sign"
+          error={error.productPrice}
+        />
 
-      <Input
-        label="Quantity"
-        name="quantity"
-        type="number"
-        value={form.quantity}
-        onChange={handleChange}
-        placeholder="Enter quantity"
-      />
-      {error.quantity && <p className="error">{error.quantity}</p>}
+        <Input
+          label="Quantity"
+          name="quantity"
+          type="number"
+          value={form.quantity}
+          onChange={handleChange}
+          placeholder="Enter quantity"
+          leftIcon="fa-box"
+          error={error.quantity}
+        />
+      </div>
 
       <button type="submit" className="btn-submit">
         {editProduct ? "Update Product" : "Add Product"}

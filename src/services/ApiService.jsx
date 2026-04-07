@@ -53,63 +53,22 @@ export const updateProduct = (id, data) =>
 export const deleteProduct = (id) => API_URL.post(`/product/delete/${id}`);
 
 // PRODUCT EXCEL UPLOAD
-// Backend endpoint names often differ; try common ones.
-export const uploadExcel = async (file) => {
+export const uploadExcel = (file) => {
   const formData = new FormData();
   formData.append("file", file);
 
-  const candidatePaths = [
-    "/product/upload",
-    "/product/upload-excel",
-    "/product/uploadExcel",
-    "/product/excel/upload",
-    "/product/import",
-    "/product/import-excel",
-    "/product/importExcel",
-  ];
-
-  let lastError;
-  for (const path of candidatePaths) {
-    try {
-      return await API_URL.post(path, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    } catch (err) {
-      lastError = err;
-      // Only fallback on 404s (wrong path). For 400/401/500, surface it.
-      const status = err?.response?.status;
-      if (status && status !== 404) throw err;
-    }
-  }
-  throw lastError;
+  return API_URL.post("/product/upload", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 // PRODUCT EXCEL DOWNLOAD
-export const downloadExcel = async () => {
-  const candidatePaths = [
-    "/product/download",
-    "/product/download-excel",
-    "/product/downloadExcel",
-    "/product/excel/download",
-    "/product/export",
-    "/product/export-excel",
-    "/product/exportExcel",
-  ];
-
-  let lastError;
-  for (const path of candidatePaths) {
-    try {
-      return await API_URL.get(path, { responseType: "blob" });
-    } catch (err) {
-      lastError = err;
-      const status = err?.response?.status;
-      if (status && status !== 404) throw err;
-    }
-  }
-  throw lastError;
-};
+export const downloadExcel = () =>
+  API_URL.get("/product/download", {
+    responseType: "blob",
+  });
 
 // GET PURCHASE
 export const getPurchase = () => API_URL.get("/purchase/allpurchase");
@@ -155,5 +114,37 @@ export const getNotifications = (user) =>
 // CLEAR NOTIFICATIONS
 export const clearNotifications = (user) =>
   API_URL.delete(`/api/notifications/${user}`);
+
+//Jasper Barcode Download 
+export const downloadBarcode = async (productId) => {
+  try {
+    const res = await API_URL.get(`/product/barcode/${productId}`, {
+      responseType: "blob",
+    });
+
+    const blob = new Blob([res.data], { type: "application/pdf" });
+    const url = window.URL.createObjectURL(blob);
+
+    // Get filename from backend 
+    const contentDisposition = res.headers["content-disposition"];
+    let fileName = `barcode_${productId}.pdf`;
+
+    if (contentDisposition) {
+      const match = contentDisposition.match(/filename="?(.+)"?/);
+      if (match?.[1]) fileName = match[1];
+    }
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error("Error downloading barcode:", err);
+  }
+};
 
 export default API_URL;

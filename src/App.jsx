@@ -13,48 +13,52 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import WarehousePage from "./pages/Warehouse/WarehousePage";
 
-/**
- * ProtectedRoute component - redirects unauthenticated users to /login
- */
+/** Redirects unauthenticated users to /login */
 function ProtectedRoute({ children, isAuthenticated }) {
-    if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
-    }
+    if (!isAuthenticated) return <Navigate to="/login" replace />;
     return children;
 }
 
-/**
- * PublicRoute component - redirects authenticated users to /
- * Useful for login, register, and forgot-password pages.
- */
+/** Redirects authenticated users away from login/register pages */
 function PublicRoute({ children, isAuthenticated }) {
-    if (isAuthenticated) {
-        return <Navigate to="/" replace />;
-    }
+    if (isAuthenticated) return <Navigate to="/" replace />;
+    return children;
+}
+
+/** Redirects non-admins to dashboard */
+function AdminRoute({ children, role }) {
+    if (role !== "ROLE_ADMIN") return <Navigate to="/" replace />;
     return children;
 }
 
 export default function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [role, setRole] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        const storedRole = localStorage.getItem("role");
+        console.log("App.jsx: Initializing auth state", { token: !!token, role: storedRole });
         setIsAuthenticated(!!token);
+        setRole(storedRole);
         setLoading(false);
 
-        // Listen for storage changes (login/logout from other tabs)
         const handleStorageChange = () => {
             const updatedToken = localStorage.getItem("token");
+            const updatedRole = localStorage.getItem("role");
             setIsAuthenticated(!!updatedToken);
+            setRole(updatedRole);
         };
 
         window.addEventListener("storage", handleStorageChange);
         return () => window.removeEventListener("storage", handleStorageChange);
     }, []);
 
-    const handleLoginSuccess = () => {
+    const handleLoginSuccess = (userRole) => {
+        console.log("App.jsx: Login success, setting role:", userRole);
         setIsAuthenticated(true);
+        setRole(userRole);
     };
 
     if (loading) return <div>Loading...</div>;
@@ -86,14 +90,6 @@ export default function App() {
                         }
                     />
                     <Route
-                        path="/register"
-                        element={
-                            <PublicRoute isAuthenticated={isAuthenticated}>
-                                <Register />
-                            </PublicRoute>
-                        }
-                    />
-                    <Route
                         path="/forgot-password"
                         element={
                             <PublicRoute isAuthenticated={isAuthenticated}>
@@ -107,15 +103,33 @@ export default function App() {
                         path="/"
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <Layout />
+                                <Layout role={role} />
                             </ProtectedRoute>
                         }
                     >
                         <Route index element={<Dashboard />} />
-                        <Route path="products" element={<ProductsPage />} />
+                        <Route path="products" element={<ProductsPage role={role} />} />
                         <Route path="purchase" element={<PurchasePage />} />
                         <Route path="sales" element={<SalesPage />} />
-                        <Route path="warehouse" element={<WarehousePage />} />
+
+                        {/* Admin-only routes */}
+                        <Route
+                            path="warehouse"
+                            element={
+                                <AdminRoute role={role}>
+                                    <WarehousePage />
+                                </AdminRoute>
+                            }
+                        />
+                        <Route
+                            path="register"
+                            element={
+                                <AdminRoute role={role}>
+                                    <Register />
+                                </AdminRoute>
+                            }
+                        />
+
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Route>
                 </Routes>

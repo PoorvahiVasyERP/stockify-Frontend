@@ -3,13 +3,13 @@ import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import Footer from "../footer/Footer";
 
-export default function Layout() {
+export default function Layout({ role }) {
   return (
     <>
       <Header />
       <div className="app-container">
         <div className="sidebar">
-          <Sidebar />
+          <Sidebar role={role} />
         </div>
 
         <div className="main-content">
