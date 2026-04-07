@@ -84,7 +84,14 @@ export default function Dashboard({ totalProducts, totalStock, totalValue }) {
             </div>
           </div>
 
-          
+          <div className="col-md-3">
+            <div className="cards cards-red">
+              <div className="cards-info">
+                <h3>LOW STOCK</h3>
+                <p>{stats.lowStockCount}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
