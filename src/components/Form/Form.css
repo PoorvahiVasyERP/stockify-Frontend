@@ -1,0 +1,115 @@
+/* --- General Form Container --- */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Form Labels --- */
+.form-container label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+/* --- Input Fields & Textarea --- */
+.form-container input,
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease-in-out;
+  box-sizing: border-box;
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+
+.form-container textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+/* --- Focus Effects --- */
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background-color: #ffffff;
+}
+
+/* --- Form Groups --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* --- Select Dropdown --- */
+.form-container select {
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+/* --- Buttons --- */
+.btn-submit,
+.purchase-form button[type="submit"] {
+  margin-top: 30px;
+  margin-left: 100px;
+  width: 50%;
+  padding: 14px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+.btn-submit:hover,
+.purchase-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(37, 99, 235, 0.3);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.btn-submit:active,
+.purchase-form button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+/* --- Error Messages --- */
+.error {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* --- Responsive Improvements --- */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 12px 15px;
+  }
+  
+  .btn-submit,
+  .purchase-form button[type="submit"] {
+    font-size: 15px;
+    padding: 12px 0;
+  }
+}

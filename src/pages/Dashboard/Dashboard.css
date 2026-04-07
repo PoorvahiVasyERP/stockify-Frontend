@@ -1,0 +1,95 @@
+.dashboard {
+    padding: 30px;
+    width: 100%;
+    background-color: #f5f5f5; 
+    min-height: calc(100vh - 70px); 
+}
+
+.dashboard-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-size: 32px;
+    color: #1a1a2e;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #e94560;
+    width: 50%;
+    font-weight: 600;
+}
+
+.cards-contain .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 18px;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 240px;
+    height: 130px;
+    overflow: hidden;
+}
+
+.cards:hover {
+    transform: translateY(-8px) scale(1.02); /* subtle lift + scale */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.card-icon {
+    font-size: 40px;
+    opacity: 0.9;
+}
+
+.card-info h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.cards-info p {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Card Gradient Colors */
+.cards-blue {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+.cards-green {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+}
+
+.cards-purple {
+    background: linear-gradient(135deg, #4a148c, #6a1b9a);
+}
+
+.cards-red {
+    background: linear-gradient(135deg, #b71c1c, #c62828);
+}
+
+.cards-teal {
+    background: linear-gradient(135deg, #004d40, #00695c);
+}
+
+@media (max-width: 1200px) {
+    .cards {
+        width: 45%; 
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .cards {
+        width: 100%; 
+    }
+}

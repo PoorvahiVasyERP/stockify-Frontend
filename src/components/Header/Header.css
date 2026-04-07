@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: rgb(19, 19, 59);
+    width: 100%;
+    height: 70px; 
+    padding: 0 40px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid darkgoldenrod;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+.header-brand {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.header-sub {
+    color: #ccc;
+    font-size: 16px;
+    margin-left: 10px;
+    font-weight: 400;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.header-profile {
+    color: white;
+    font-size: 15px;
+    background: #1a1a2e;
+    padding: 8px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e94560;
+    transition: all 0.3s ease;
+}
+
+.header-profile:hover {
+    background: #16213e;
+    box-shadow: 0 0 12px rgba(233, 69, 96, 0.5);
+    transform: translateY(-2px); /* subtle lift effect */
+}
+
+.user-dropdown-info {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #1a1a2e;
+    border: 1px solid #e94560;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.user-dropdown-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+        padding: 0 20px;
+        flex-direction: column;
+        height: auto;
+        gap: 5px;
+    }
+
+    .header-brand {
+        font-size: 24px;
+    }
+
+    .header-sub {
+        font-size: 14px;
+    }
+
+    .header-user {
+        margin-top: 5px;
+    }
+}

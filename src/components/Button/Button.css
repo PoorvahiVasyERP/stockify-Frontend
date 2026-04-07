@@ -1,0 +1,91 @@
+/* Base Button Styles */
+.custom-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  margin: 0 4px;
+}
+
+.custom-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Add Button */
+.custom-btn-add {
+  background-color: #34c759;
+  color: white;
+  padding: 10px 20px;
+}
+.custom-btn-add:hover:not(:disabled) {
+  background-color: #2da94b;
+  box-shadow: 0 4px 8px rgba(52, 199, 89, 0.3);
+}
+
+/* Edit Button */
+.custom-btn-edit {
+  background-color: #007aff;
+  color: white;
+}
+.custom-btn-edit:hover:not(:disabled) {
+  background-color: #0062cc;
+  box-shadow: 0 4px 8px rgba(0, 122, 255, 0.3);
+}
+
+/* Delete Button */
+.custom-btn-delete {
+  background-color: #ff3b30;
+  color: white;
+}
+.custom-btn-delete:hover:not(:disabled) {
+  background-color: #d7332a;
+  box-shadow: 0 4px 8px rgba(255, 59, 48, 0.3);
+}
+
+/* Comment Button */
+.custom-btn-comment {
+  background-color: #ff9500;
+  color: white;
+}
+.custom-btn-comment:hover:not(:disabled) {
+  background-color: #d97f00;
+  box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3);
+}
+
+/* Primary / Default */
+.custom-btn-primary {
+  background-color: #e94560;
+  color: white;
+}
+
+.custom-btn-primary:hover:not(:disabled) {
+  background-color: #c93b51;
+  box-shadow: 0 4px 8px rgba(233, 69, 96, 0.3);
+}
+
+.custom-btn-upload {
+  background-color: darkslateblue;
+  color: white;
+}
+
+.custom-btn-upload:hover:not(:disabled) {
+  background-color: #5a4a9e;
+  box-shadow: 0 4px 8px rgba(72, 69, 233, 0.3);
+}
+
+.custom-btn-download {
+  background-color: darkorchid;
+  color: white;
+}
+
+.custom-btn-download:hover:not(:disabled) {
+  background-color: darkorchid;
+  box-shadow: 0 4px 8px rgba(233, 69, 214, 0.3);
+}

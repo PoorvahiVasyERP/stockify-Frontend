@@ -1,0 +1,92 @@
+.sidebar-container {
+    width: 220px;
+    min-height: calc(100vh - 70px); /* Adjust for header height */
+    background-color: rgb(19, 19, 59);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* modern font */
+    position: sticky;
+    top: 70px; /* sticks below header */
+    border-right: 2px solid darkgoldenrod;
+    transition: all 0.3s ease;
+}
+
+.sidebar-container h3 {
+    color: #aaaaaa;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    padding: 0 20px 15px;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid #2a2a4a;
+    font-weight: 600;
+}
+
+.sidebar-container ul {
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar-container li {
+    padding: 0;
+    cursor: pointer;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #cccccc;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    margin-bottom: 8px;
+    border-radius: 6px; /* smooth edges */
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    background-color: #2a2a4a;
+    color: #ffffff;
+    border-left: 3px solid darkgoldenrod;
+}
+
+.link.active {
+    background-color: #1a1a2e; /* active page highlight */
+    color: #ffffff;
+    border-left: 3px solid darkgoldenrod;
+}
+
+/* Optional icons for modern look */
+.link i {
+    font-size: 16px;
+    color: inherit;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar-container {
+        width: 60px; /* collapse sidebar on smaller screens */
+        padding: 10px 0;
+    }
+
+    .sidebar-container h3 {
+        display: none; /* hide headings when collapsed */
+    }
+
+    .link {
+        justify-content: center;
+        padding: 12px 0;
+        margin-bottom: 10px;
+    }
+
+    .link span {
+        display: none; /* hide text, show only icons */
+    }
+}

@@ -1,0 +1,87 @@
+/* Container */
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 100%;
+  background: lightblue;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.comment-box h3 {
+  margin: 0;
+  padding: 12px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+/* Messages container */
+.comment-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #fafafa;
+}
+
+/* Single message */
+.comment-message {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  background: #bdcbd5;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+/* Username */
+.comment-message b {
+  display: block;
+  font-size: 12px;
+  color: #0d47a1;
+  margin-bottom: 2px;
+}
+
+/* Input area */
+.comment-input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 8px;
+  gap: 8px;
+  background: #fff;
+}
+
+/* Input field */
+.comment-input-area input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Input focus */
+.comment-input-area input:focus {
+  border-color: #1976d2;
+}
+
+/* Send button */
+.comment-input-area button {
+  padding: 8px 14px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Hover effect */
+.comment-input-area button:hover {
+  background: #125ea2;
+}

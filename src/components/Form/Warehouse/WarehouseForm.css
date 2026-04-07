@@ -1,0 +1,81 @@
+/* --- Form Container --- */
+.warehouse-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px 25px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Input Styling --- */
+.warehouse-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background-color: #f9fafb;
+  color: #1f2937;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.warehouse-form input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background-color: #ffffff;
+}
+
+/* --- Labels --- */
+.warehouse-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+/* --- Error Messages --- */
+.warehouse-form .error {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+
+
+/* --- Add Warehouse Button --- */
+.btn-add-warehouse {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* space for icon if needed */
+}
+
+/*ADD WAREHOUSE BTN*/
+.btn-add-warehouse:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn-add-warehouse:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+}

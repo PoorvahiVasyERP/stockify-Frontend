@@ -1,0 +1,157 @@
+/* --- Button Style --- */
+.btn-add-product {
+  background-color: #2196F3;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(33, 150, 243, 0.2);
+}
+
+.btn-add-product:hover {
+  background-color: #1976D2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(33, 150, 243, 0.3);
+}
+
+/* --- Fade-in Animation --- */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Modal Overlay --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+/* --- Modal Box --- */
+.modal-box {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 95%;
+  min-height: 450px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --- Modal Header --- */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1c2d51;
+  margin: 0;
+}
+
+/* --- Close Button --- */
+.modal-close {
+  background: #f3f4f6;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* --- Modal Body --- */
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #374151;
+}
+
+/* --- Custom Scrollbar --- */
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* --- Utility Classes --- */
+.no-scroll-body {
+  overflow-y: visible;
+}
+
+.no-scroll-box {
+  max-height: none;
+  min-height: auto;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .modal-box {
+    width: 90%;
+    padding: 20px;
+    min-height: 350px;
+  }
+
+  .modal-title {
+    font-size: 24px;
+  }
+}

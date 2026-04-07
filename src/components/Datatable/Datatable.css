@@ -1,0 +1,71 @@
+table {
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header */
+thead {
+  background: linear-gradient(90deg, #1976D2, #1565C0);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 12px 20px;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Table cells */
+td {
+  padding: 14px 20px;
+  color: #333;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+/* Zebra stripes for readability */
+tbody tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+/* Hover effect */
+tbody tr:hover td {
+  background-color: #e3f2fd;
+  transition: background-color 0.3s ease;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead tr {
+    display: none;
+  }
+  td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #1976D2;
+  }
+}
